@@ -1,0 +1,242 @@
+[
+  {
+    "text": "철수한테 오천 원 보내줘",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "철수",
+      "amount": 10000
+    },
+    "response": "철수님께 10,000원을 전달해드릴까요?",
+    "_meta": {
+      "inference_time": 2.53
+    }
+  },
+  {
+    "text": "엄마한테 3만원만",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "엄마",
+      "amount": 30000
+    },
+    "response": "엄마님께 30,000원을 송금해드릴까요?",
+    "_meta": {
+      "inference_time": 2.51
+    }
+  },
+  {
+    "text": "만원만 보내줘",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "받는 사람",
+      "amount": 10000
+    },
+    "response": "만원을 받으실 수 있습니다.",
+    "_meta": {
+      "inference_time": 1.97
+    }
+  },
+  {
+    "text": "엄마한테 보내줘",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "엄마",
+      "amount": 30000
+    },
+    "response": "엄마님께 30,000원을 보내드리겠습니다.",
+    "_meta": {
+      "inference_time": 2.27
+    }
+  },
+  {
+    "text": "나 송금하고 싶어",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "나",
+      "amount": 10000
+    },
+    "response": "네, 나도 송금하시겠어요?",
+    "_meta": {
+      "inference_time": 1.94
+    }
+  },
+  {
+    "text": "가스비 내야 하는데 어떻게 해야 해?",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "가스비",
+      "amount": null
+    },
+    "response": "가스비를 내는 방법은 다음과 같습니다. 먼저 가스비를 구매하고, 이를 통해 가스를 출구로 가져와서 가스를 사용하세요. 다른 방법이 있으신가요?",
+    "_meta": {
+      "inference_time": 3.65
+    }
+  },
+  {
+    "text": "내 계좌에 얼마 남았어?",
+    "intent": "inquiry",
+    "slots": {
+      "recipient": null,
+      "amount": null
+    },
+    "response": "내 계좌에는 현재 10,000원이 있습니다.",
+    "_meta": {
+      "inference_time": 1.91
+    }
+  },
+  {
+    "text": "그 사람한테 또 보내줘",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "그 사람",
+      "amount": null
+    },
+    "response": "그 사람에게 다시 10,000원을 보내줄까요?",
+    "_meta": {
+      "inference_time": 2.06
+    }
+  },
+  {
+    "text": "아까랑 똑같이 보내줘",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "아까",
+      "amount": null
+    },
+    "response": "아까와 같이 보내겠습니다",
+    "_meta": {
+      "inference_time": 1.46
+    }
+  },
+  {
+    "text": "송금할래",
+    "intent": "transfer",
+    "slots": {
+      "recipient": null,
+      "amount": null
+    },
+    "response": "송금하실 대상과 금액을 말씀해주세요.",
+    "_meta": {
+      "inference_time": 1.73
+    }
+  },
+  {
+    "text": "이체 수수료 얼마야?",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "받는 사람",
+      "amount": null
+    },
+    "response": "이체 수수료를 알려드리겠습니다.",
+    "_meta": {
+      "inference_time": 1.73
+    }
+  },
+  {
+    "text": "오늘 아빠랑 점심 먹었어",
+    "intent": "inquiry",
+    "slots": {
+      "recipient": "아빠",
+      "amount": null
+    },
+    "response": "네, 아빠와 점심을 먹었습니다.",
+    "_meta": {
+      "inference_time": 1.83
+    }
+  },
+  {
+    "text": "아빠한테 이만원 보내줘",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "아빠",
+      "amount": 10000
+    },
+    "response": "아빠님께 이만원을 전달해드릴까요?",
+    "_meta": {
+      "inference_time": 2.25
+    }
+  },
+  {
+    "text": "여보한테 십만 원 이체해줘",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "여보",
+      "amount": 10000
+    },
+    "response": "여보님께 10만원 이체해드릴게요",
+    "_meta": {
+      "inference_time": 2.26
+    }
+  },
+  {
+    "text": "보내지 마",
+    "intent": "cancel",
+    "slots": {
+      "recipient": null,
+      "amount": null
+    },
+    "response": "요청하신 송금을 취소했습니다.",
+    "_meta": {
+      "inference_time": 1.58
+    }
+  },
+  {
+    "text": "그냥 넘어가줘",
+    "intent": "inquiry",
+    "slots": {
+      "recipient": null,
+      "amount": null
+    },
+    "response": "네, 당신이 원하시는 것에 대해 알려드리겠습니다. 무엇을 도와드릴까요?",
+    "_meta": {
+      "inference_time": 2.18
+    }
+  },
+  {
+    "text": "엄마 송금해줘",
+    "intent": "transfer",
+    "slots": {
+      "recipient": "엄마",
+      "amount": 30000
+    },
+    "response": "엄마님께 30,000원을 송금해드릴까요?",
+    "_meta": {
+      "inference_time": 2.48
+    }
+  },
+  {
+    "text": "아, 삼만원 보내는 거였지",
+    "intent": "transfer",
+    "slots": {
+      "recipient": null,
+      "amount": 30000
+    },
+    "response": "삼만원을 보내는 거였습니다.",
+    "_meta": {
+      "inference_time": 1.81
+    }
+  },
+  {
+    "text": "예금해줘",
+    "intent": "transfer",
+    "slots": {
+      "recipient": null,
+      "amount": 10000
+    },
+    "response": "예금해드릴게요",
+    "_meta": {
+      "inference_time": 1.63
+    }
+  },
+  {
+    "text": "누구한테 보낼까요?",
+    "intent": "inquiry",
+    "slots": {
+      "recipient": "누구",
+      "amount": null
+    },
+    "response": null,
+    "_meta": {
+      "inference_time": 0.73
+    }
+  }
+]
