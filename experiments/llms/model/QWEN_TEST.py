@@ -7,12 +7,12 @@ import json
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # %% data load
-with open("/workspace/MCP_Voice_Transfer/experiments/llms/test/labeled data/samples.json") as f:
+with open("/workspace/MCP_Voice_Transfer/experiments/llms/labeled data/samples.json") as f:
     samples=json.load(f)
 
-with open("/workspace/MCP_Voice_Transfer/experiments/llms/test/labeled data/transfer.json") as f:
+with open("/workspace/MCP_Voice_Transfer/experiments/llms/labeled data/transfer.json") as f:
     transfer=json.load(f)
-with open("/workspace/MCP_Voice_Transfer/experiments/llms/test/labeled data/non_memory.json") as f:
+with open("/workspace/MCP_Voice_Transfer/experiments/llms/labeled data/non_memory.json") as f:
     non_memory=json.load(f)
         
 print(samples)
