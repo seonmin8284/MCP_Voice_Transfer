@@ -51,7 +51,7 @@ def unified_system_prompt(input_text: str) -> list:
         **주의**:
         - `intent`는 반드시 위의 범주 중 하나로만 반환되어야 합니다.
         - `amount`는 명시된 숫자를 기반으로 하며 없을 경우 `None`을 반환합니다.
-        - `recipient`는 발화에서 언급된 사람의 이름을 추출합니다. 없을 경우 `None`입니다.
+        - `recipient`는 발화에서 언급된 사람을 추출합니다. 없을 경우 `None`입니다.
         - `response`는 사용자의 발화에 대해 자연스러운 한국어 안내문을 생성해야 합니다.
 
         **사용자 발화:**
