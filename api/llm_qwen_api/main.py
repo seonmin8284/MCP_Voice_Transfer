@@ -62,7 +62,7 @@ app = FastAPI(lifespan=lifespan)
 
 class InferenceRequest(BaseModel):
     input_text: str
-    prompt_version: str = "prompt4" # 기본 프롬프트 버전
+    prompt_version: str = "prompt5" # 기본 프롬프트 버전
     max_new_tokens: int = 128
 
 class InferenceResponse(BaseModel):

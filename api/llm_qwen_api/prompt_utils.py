@@ -148,11 +148,131 @@ def unified_system_prompt4(input_text: str) -> list:
     return [system_message, user_message]
 
 
+def unified_system_prompt5(input_text: str) -> list:
+    system_message = {
+        "role": "system",
+        "content": f"""
+        다음 문장을 분석하여 intent, amount, recipient, response를 예시 형식에 맞게 추출해 주세요.
+
+        **intent**는 다음 중 하나입니다:
+        - `transfer`: 사용자가 금전을 송금하려는 의도
+        - `confirm`: 이전 발화의 확인 또는 반복
+        - `cancel`: 이전 동작을 취소하거나 거절하는 의도
+        - `inquiry`: 송금 및 관련 정보 확인 요청
+        - `other`: 시스템과 관련 없는 일상적인 대화 또는 분류 불가한 문장
+        - `system_response`: 시스템의 재질문 또는 안내 응답
+
+
+        예시:
+        text: "엄마한테 삼만원 보내줘"
+
+        {{ "intent": "transfer", "amount": 30000, "recipient": "엄마", "response": "엄마님께 30,000원을 송금해드릴까요?" }}
+        
+        text: "송금할래"
+        
+        {{"intent": "transfer","amount": null,"recipient": null,"response": "송금하실 대상과 금액을 말씀해주세요."}}
+        
+        text: "보내지 마",
+        
+        {{"intent": "cancel","recipient": null,"amount": null,"response": "요청하신 송금을 취소했습니다."}}
+        
+        text: "아, 삼만원 보내는 거였지",
+        
+        {{"intent": "confirm","recipient": null,"amount": 30000,"response": "30,000원 송금 요청으로 확인했습니다."}}
+  
+
+        **주의**:
+        - `intent`는 반드시 위의 범주 중 하나로만 반환되어야 합니다.
+        - 송금의도가 있을 경우, recipient, amount 추출하고 없을 경우 `null`입니다. 
+        - `amount`는 명시된 숫자를 기반으로 하며 없을 경우 `null`을 반환합니다.
+        - recipient: 발화에 등장하는 사람 대상으로 고유 이름, 호칭, 관계 표현 포함하고 없을 경우 `null`입니다. 
+        - `response`는 사용자의 발화에 대해 자연스러운 한국어 안내문을 생성해야 합니다. 또한 송금 의도가 있을 경우 간단한 송금 안내문을 생성하고 정보성 질문일 경우 짧고 정중한 설명 제공하고
+         그 외 일반 대화는 간단한 대화형 응답 생성하세요.
+
+        **사용자 발화:**
+        {input_text}
+        """
+    }
+
+    user_message = {
+        "role": "user",
+        "content": input_text
+    }
+
+    return [system_message, user_message]
+    # return [user_message]
+
+def unified_system_prompt6(input_text: str) -> list:
+    system_message = {
+        "role": "system",
+        "content": f"""
+당신은 한국어 기반 송금 챗봇 어시스턴트입니다. 아래 지침에 따라 사용자의 발화를 분석하고 다음 항목을 추출하세요:
+
+- intent: 사용자의 발화 의도 (반드시 아래 목록 중 하나만)
+  - transfer: 금전 송금 의도
+  - confirm: 이전 발화에 대한 확인
+  - cancel: 동작 취소 또는 거절 의도
+  - inquiry: 정보 확인 요청
+  - other: 일상 대화 혹은 분류 불가
+  - system_response: 시스템의 재질문 또는 안내
+
+- recipient: 사람 이름 (존칭 없이 발화에 나온 대로 추출, 없으면 null)
+- amount: 숫자(단위 원), 명확한 수치만 (없으면 null)
+- response: 자연스러운 한국어 응답. 송금이면 간단한 안내, 질문이면 정중한 설명, 일상 대화면 짧은 응답 생성
+
+**출력 형식은 반드시 다음과 같은 JSON 형식이어야 합니다.**
+
+예시:
+
+text: "엄마한테 삼만원 보내줘"  
+{{
+  "intent": "transfer",
+  "amount": 30000,
+  "recipient": "엄마",
+  "response": "엄마님께 30,000원을 송금해드릴까요?"
+}}
+
+text: "보내지 마"  
+{{
+  "intent": "cancel",
+  "amount": null,
+  "recipient": null,
+  "response": "요청하신 송금을 취소했습니다."
+}}
+
+text: "삼만원 보내는 거였지"  
+{{
+  "intent": "confirm",
+  "amount": 30000,
+  "recipient": null,
+  "response": "30,000원 송금 요청으로 확인했습니다."
+}}
+
+**주의사항:**
+- intent는 반드시 하나만 선택하고, 위 범주 외의 값은 허용되지 않습니다.
+- amount와 recipient는 **transfer 의도일 때만 값 추출**, 그 외에는 null
+- amount: 숫자(단위 원), 명확한 수치만 (없으면 null)
+- `recipient`는 발화에서 언급된 사람을 추출합니다. 없을 경우 `null`입니다.
+- response는 사용자의 의도에 맞는 자연스러운 안내문이어야 합니다.
+- 응답은 반드시 한국어로 출력하며, 한자 사용은 금지합니다.
+
+**사용자 발화:**  
+{input_text}
+"""
+    }
+
+    user_message = {"role": "user","content": input_text}
+
+    return [system_message, user_message]
+
+
 PROMPT_FUNCTIONS = {
     "prompt1": unified_system_prompt1,
     "prompt2": unified_system_prompt2,
     "prompt3": unified_system_prompt3,
     "prompt4": unified_system_prompt4,
+    "prompt5": unified_system_prompt5,  # 추가
+    "prompt6": unified_system_prompt6,  # 추가
 }
 
 # ##############################################
@@ -276,3 +396,67 @@ def run_inference(
         parsed_json = {"error": "No JSON found in output", "raw_output": output_text}
 
     return parsed_json, inference_time 
+
+# 단계별 성능 측정 run_inference
+# def run_inference(input_text: str, prompt_func_key: str, tokenizer, model, max_new_tokens=128):
+#     time_logs = {}
+
+#     start_total = time.time()
+
+#     # 1. 프롬프트 생성
+#     t0 = time.time()
+#     prompt_func = PROMPT_FUNCTIONS.get(prompt_func_key)
+#     messages = prompt_func(input_text)
+#     time_logs["prompt_func"] = round(time.time() - t0, 4)
+
+#     # 2. Chat 템플릿 적용
+#     t1 = time.time()
+#     try:
+#         chat_template_inputs = tokenizer.apply_chat_template(
+#             messages, tokenize=False, add_generation_prompt=True
+#         )
+#     except Exception as e:
+#         chat_template_inputs = "\n".join([msg["content"] for msg in messages])
+#     time_logs["chat_template"] = round(time.time() - t1, 4)
+
+#     # 3. 토크나이징
+#     t2 = time.time()
+#     inputs = tokenizer(chat_template_inputs, return_tensors="pt").to(model.device)
+#     time_logs["tokenize"] = round(time.time() - t2, 4)
+
+#     # 4. 모델 추론
+#     t3 = time.time()
+#     try:
+#         outputs = model.generate(
+#             **inputs,
+#             max_new_tokens=max_new_tokens,
+#             do_sample=False,
+#             use_cache=True
+#         )
+#     except Exception as e:
+#         return {"error": str(e)}, None, 0.0
+#     time_logs["generate"] = round(time.time() - t3, 4)
+
+#     # 5. 후처리
+#     t4 = time.time()
+#     full_generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+#     assistant_split = full_generated_text.split("assistant\n")
+#     output_text = assistant_split[-1].strip() if len(assistant_split) > 1 else full_generated_text.strip()
+
+#     match = re.search(r'\{\s*"intent":.*?\}', output_text, re.DOTALL | re.IGNORECASE)
+#     if match:
+#         try:
+#             parsed_json = json.loads(match.group())
+#         except json.JSONDecodeError as e:
+#             parsed_json = {"error": "JSON parsing failed", "raw_output": output_text}
+#     else:
+#         parsed_json = {"error": "No JSON found in output", "raw_output": output_text}
+#     time_logs["postprocess"] = round(time.time() - t4, 4)
+
+#     # 전체 시간
+#     time_logs["total"] = round(time.time() - start_total, 4)
+
+#     # 결과에 로그 포함
+#     parsed_json["_timing"] = time_logs
+
+#     return parsed_json, time_logs["total"]
