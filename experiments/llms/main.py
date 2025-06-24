@@ -1,36 +1,51 @@
 # %% library load
 !pip install -r requirements.txt
-import torch
-import importlib
-from runner import llm_sampling,run_inference,evaluate_results
+import sys
+sys.path.append("/Users/hajin/Projects/MCP_Voice_Transfer/experiments/llms")
+import os
 import json
+import importlib
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from runner import llm_sampling, run_inference, evaluate_results,run_inference_qwen3
+from mlx_lm import load, generate
 
 # %% data load
-with open("/workspace/MCP_Voice_Transfer/experiments/llms/labeled data/samples.json") as f:
-    samples=json.load(f)
+# 파일 열기
+with open("/Users/hajin/Projects/MCP_Voice_Transfer/experiments/llms/data/samples.json", "r", encoding="utf-8") as f:
+    samples = json.load(f)
 
-with open("/workspace/MCP_Voice_Transfer/experiments/llms/labeled data/transfer.json") as f:
-    transfer=json.load(f)
-with open("/workspace/MCP_Voice_Transfer/experiments/llms/labeled data/non_memory.json") as f:
-    non_memory=json.load(f)
-        
-print(samples)
+with open("/Users/hajin/Projects/MCP_Voice_Transfer/experiments/llms/data/transfer.json", "r", encoding="utf-8") as f:
+    transfer = json.load(f)
 
-# %% data load
-tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct",torch_dtype=torch.float16).to("cuda")
+with open("/Users/hajin/Projects/MCP_Voice_Transfer/experiments/llms/data/non_memory.json", "r", encoding="utf-8") as f:
+    non_memory = json.load(f)
+
+print(f"샘플 수: {len(samples)}")
+
+# %% model load
+device = "mps" if torch.backends.mps.is_available() else "cpu"
+
+# # model_name = "Qwen/Qwen2.5-0.5B-Instruct"  
+# model = AutoModelForCausalLM.from_pretrained(model_name,
+#                                              torch_dtype=torch.float16,
+#                                              device_map={"":device}
+#                                              )
+# tokenizer=AutoTokenizer.from_pretrained(model_name)
+
+model_name="Qwen/Qwen3-1.7B-MLX-8bit"
+model, tokenizer = load("Qwen/Qwen3-1.7B-MLX-8bit")
 
 
 #%%
-from prompts import unified_system_prompt6
-result, pasing, elapsed = run_inference("안녕",unified_system_prompt6, tokenizer, model)
+from prompts import unified_system_prompt1
+result, pasing, elapsed = run_inference_qwen3("안녕",unified_system_prompt1, tokenizer, model)
 print("🔍 추론 결과:", result)
 print("🧩 파싱된 JSON:\n", pasing)
 print("⏱️ 처리 시간:", elapsed, "초")
 
 print(samples[3]['text'])
-result, pasing, elapsed = run_inference(samples[3]['text'],unified_system_prompt6, tokenizer, model)
+result, pasing, elapsed = run_inference_qwen3(samples[3]['text'],unified_system_prompt1, tokenizer, model)
 print("🔍 추론 결과:", result)
 print("🧩 파싱된 JSON:\n", pasing)
 print("⏱️ 처리 시간:", elapsed, "초")
