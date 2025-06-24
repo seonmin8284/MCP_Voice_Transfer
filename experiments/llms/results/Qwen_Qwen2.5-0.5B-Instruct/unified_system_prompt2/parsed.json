@@ -8,7 +8,7 @@
     },
     "response": "엄마님께 10,000원을 전달해드릴게요.",
     "_meta": {
-      "inference_time": 2.63
+      "inference_time": 46.5
     }
   },
   {
@@ -20,7 +20,7 @@
     },
     "response": "엄마님께 30,000원을 송금해드릴까요?",
     "_meta": {
-      "inference_time": 2.62
+      "inference_time": 19.01
     }
   },
   {
@@ -32,7 +32,7 @@
     },
     "response": "엄마님께 1만원을 송금해드릴까요?",
     "_meta": {
-      "inference_time": 2.46
+      "inference_time": 21.4
     }
   },
   {
@@ -45,7 +45,7 @@
     "response": "",
     "_meta": {
       "error": "Parsing failed",
-      "inference_time": 1.15
+      "inference_time": 9.7
     }
   },
   {
@@ -57,7 +57,7 @@
     },
     "response": null,
     "_meta": {
-      "inference_time": 1.54
+      "inference_time": 14.37
     }
   },
   {
@@ -70,7 +70,7 @@
     "response": "",
     "_meta": {
       "error": "Parsing failed",
-      "inference_time": 1.52
+      "inference_time": 17.12
     }
   },
   {
@@ -82,7 +82,7 @@
     },
     "response": "계좌에는 50,000원이 있습니다.",
     "_meta": {
-      "inference_time": 2.25
+      "inference_time": 20.23
     }
   },
   {
@@ -94,7 +94,7 @@
     },
     "response": "제 친구님께 50,000원을 전달해드릴게요.",
     "_meta": {
-      "inference_time": 3.04
+      "inference_time": 33.81
     }
   },
   {
@@ -106,7 +106,7 @@
     },
     "response": "엄마님께 30,000원을 송금해드릴까요?",
     "_meta": {
-      "inference_time": 2.87
+      "inference_time": 22.59
     }
   },
   {
@@ -119,19 +119,19 @@
     "response": "",
     "_meta": {
       "error": "Parsing failed",
-      "inference_time": 1.2
+      "inference_time": 10.06
     }
   },
   {
     "text": "이체 수수료 얼마야?",
     "intent": "transfer",
     "slots": {
-      "recipient": "이메일주소",
+      "recipient": "이체주",
       "amount": null
     },
-    "response": "저희 서비스에서는 이체 수수료가 없습니다.",
+    "response": "저희는 이체 수수료를 지원하지 않습니다.",
     "_meta": {
-      "inference_time": 2.3
+      "inference_time": 17.42
     }
   },
   {
@@ -143,7 +143,7 @@
     },
     "response": "점심 먹으셨어요! 오늘 아빠님께 30,000원을 송금해드릴게요.",
     "_meta": {
-      "inference_time": 3.43
+      "inference_time": 37.88
     }
   },
   {
@@ -156,7 +156,7 @@
     "response": "",
     "_meta": {
       "error": "Parsing failed",
-      "inference_time": 1.14
+      "inference_time": 9.38
     }
   },
   {
@@ -168,7 +168,7 @@
     },
     "response": null,
     "_meta": {
-      "inference_time": 1.52
+      "inference_time": 13.06
     }
   },
   {
@@ -180,7 +180,7 @@
     },
     "response": "알겠습니다, 그대로 보내드리겠습니다.",
     "_meta": {
-      "inference_time": 1.62
+      "inference_time": 14.17
     }
   },
   {
@@ -192,7 +192,7 @@
     },
     "response": "네, 저는 이전의 정보를 가지고 있지 않습니다. 어떤 기능을 원하시나요?",
     "_meta": {
-      "inference_time": 2.52
+      "inference_time": 30.76
     }
   },
   {
@@ -205,7 +205,7 @@
     "response": "",
     "_meta": {
       "error": "Parsing failed",
-      "inference_time": 1.17
+      "inference_time": 10.93
     }
   },
   {
@@ -217,7 +217,7 @@
     },
     "response": "엄마님께 30,000원을 송금해드릴까요?",
     "_meta": {
-      "inference_time": 2.91
+      "inference_time": 25.57
     }
   },
   {
@@ -229,7 +229,7 @@
     },
     "response": "부모님께 50,000원을 전달해드릴까요?",
     "_meta": {
-      "inference_time": 2.85
+      "inference_time": 24.49
     }
   },
   {
@@ -241,7 +241,7 @@
     },
     "response": "손님이 보낼까요?",
     "_meta": {
-      "inference_time": 1.88
+      "inference_time": 16.44
     }
   }
 ]

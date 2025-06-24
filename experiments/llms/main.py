@@ -1,25 +1,36 @@
 # %% library load
 !pip install -r requirements.txt
-import torch
-import importlib
-from runner import llm_sampling,run_inference,evaluate_results
+import sys
+sys.path.append("/Users/hajin/Projects/MCP_Voice_Transfer/experiments/llms")
+import os
 import json
+import importlib
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from runner import llm_sampling, run_inference, evaluate_results
+
 
 # %% data load
-with open("/workspace/MCP_Voice_Transfer/experiments/llms/labeled data/samples.json") as f:
-    samples=json.load(f)
+# 파일 열기
+with open("/Users/hajin/Projects/MCP_Voice_Transfer/experiments/llms/data/samples.json", "r", encoding="utf-8") as f:
+    samples = json.load(f)
 
-with open("/workspace/MCP_Voice_Transfer/experiments/llms/labeled data/transfer.json") as f:
-    transfer=json.load(f)
-with open("/workspace/MCP_Voice_Transfer/experiments/llms/labeled data/non_memory.json") as f:
-    non_memory=json.load(f)
-        
-print(samples)
+with open("/Users/hajin/Projects/MCP_Voice_Transfer/experiments/llms/data/transfer.json", "r", encoding="utf-8") as f:
+    transfer = json.load(f)
 
-# %% data load
-tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
-model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct",torch_dtype=torch.float16).to("cuda")
+with open("/Users/hajin/Projects/MCP_Voice_Transfer/experiments/llms/data/non_memory.json", "r", encoding="utf-8") as f:
+    non_memory = json.load(f)
+
+print(f"샘플 수: {len(samples)}")
+
+# %% model load
+model_name = "Qwen/Qwen2.5-0.5B-Instruct"  # 또는 Qwen 등
+
+device = "mps" if torch.backends.mps.is_available() else "cpu"
+model = AutoModelForCausalLM.from_pretrained(model_name,
+                                             device_map={"":device},
+                                             )
+tokenizer=AutoTokenizer.from_pretrained(model_name)
 
 
 #%%

@@ -1,26 +1,25 @@
-
 def unified_system_prompt1(input_text: str) -> list:
-
     system_message = {
         "role": "system",
         "content": """
-당신은 사용자의 금융 발화를 분석하는 AI 송금 도우미입니다. 다음 지침에 따라 작동하세요:
+당신은 송금 챗봇 어시스턴트입니다.  
+사용자의 문장을 분석하여 다음 항목을 JSON 형식으로 추출하세요:
 
-1. 사용자의 문장에서 다음 항목을 추출하세요:
-    - intent: 다음 중 하나 (transfer, confirm, cancel, inquiry, other, system_response)
-    - amount: 숫자만 추출 (없으면 null)
-    - recipient: 사람 이름 등 (없으면 null)
+- intent: transfer, confirm, cancel, inquiry, other, system_response 중 하나
+- amount: 송금 금액 (숫자, 없으면 null)
+- recipient: 수신자 이름 또는 호칭 (없으면 null)
+- response: 사용자에게 제공할 자연스러운 안내 문장
 
-2. 사용자의 발화에 어울리는 자연스러운 안내 응답(response)을 생성하세요.
-
-3. 다음 JSON 형식으로 하나의 객체로 응답하세요. 다른 텍스트는 출력하지 마세요.
+조건:
+- amount, recipient는 intent가 transfer일 때만 추출하며, 그 외에는 null로 설정하세요.
+- 출력은 하나의 JSON 객체만 포함해야 하며, 그 외의 텍스트는 출력하지 마세요.
 
 예시:
 {
   "intent": "transfer",
   "amount": 30000,
   "recipient": "엄마",
-  "response": "엄마님께 30,000원을 송금해드릴까요?"
+  "response": "엄마님께 30,000원을 송금하시겠어요?"
 }
 """
     }
@@ -33,14 +32,15 @@ def unified_system_prompt1(input_text: str) -> list:
     return [system_message, user_message]
 
 
-def unified_system_prompt2(input_text: str) -> list:
+
+def unified_system_prompt2(input_text: str) -> list: 
     system_message = {
             "role": "system",
             "content": """
 당신은 사용자의 금융 발화를 분석하는 AI 송금 도우미입니다. 다음 지침에 따라 작동하세요:
 
 1. 사용자의 문장에서 다음 항목을 추출하세요:
-    - **intent**: 사용자의 요청 의도 (다음 중 하나: transfer, confirm, cancel, inquiry, other, system_response)
+    - **intent: 사용자의 요청 의도 (다음 중 하나: transfer, confirm, cancel, inquiry, other, system_response)
     - **amount**: 금액만 추출 (금액이 명시되지 않으면 null로 설정)
     - **recipient**: 송금 대상 사람 이름 (이름이 명시되지 않으면 null로 설정)
 
@@ -287,3 +287,416 @@ text: "삼만원 보내는 거였지"
     }
 
     return [system_message, user_message]
+
+def unified_system_prompt_eng1(input_text: str):
+    system_message = {
+        "role": "system",
+        "content": f"""
+You are a Korean-speaking AI assistant that extracts structured information from user messages related to money transfers.
+
+Your task is to analyze the user's sentence and return the following four fields as a single JSON object:
+
+- intent: one of [transfer, confirm, cancel, inquiry, other, system_response]
+- amount: integer amount in KRW (e.g. 30000), or null if not specified
+- recipient: name or label of the target person, or null if not present
+- response: natural Korean response based on the user's intent
+
+Conditions:
+- Only extract `amount` and `recipient` if `intent` is "transfer". Otherwise, set them to null.
+- Always respond with **only a single valid JSON object**. Do not include any other text, comments, or explanations.
+- All numbers must be normalized to integers (e.g., 삼만 원 == 30000).
+- The response field must be a polite Korean message that fits the intent.
+
+Example input and expected output:
+
+Input: "엄마한테 삼만 원 보내줘"  
+Output:
+{{
+  "intent": "transfer",
+  "amount": 30000,
+  "recipient": "엄마",
+  "response": "엄마님께 30,000원을 송금하시겠어요?"
+}}
+
+Now, analyze the following user input:
+{input_text}
+"""
+    }
+
+    user_message = {
+        "role": "user",
+        "content": input_text
+    }
+
+    return [system_message, user_message]
+
+def unified_system_prompt_eng2(input_text: str) -> list:
+    system_message = {
+        "role": "system",
+        "content": f"""
+You are a helpful AI assistant that analyzes Korean user messages related to money transfers.
+
+Your task is to extract four fields from the user's sentence and respond in **one valid JSON object**. This output should be structured and concise.
+
+---
+
+### 📌 Fields to extract:
+
+1. `intent`: One of the following —
+   - "transfer": The user wants to send money.
+   - "confirm": The user is confirming a previous action.
+   - "cancel": The user wants to cancel a previous action.
+   - "inquiry": The user is asking about balance or status.
+   - "other": The message is casual or unrelated.
+   - "system_response": The assistant is guiding the user.
+
+2. `amount`: A numeric value in KRW (e.g. 30000). Use `null` if not clearly mentioned.
+3. `recipient`: The name or relationship of the person receiving the money. Use `null` if not mentioned.
+4. `response`: A polite Korean sentence that naturally guides the user based on their intent.
+
+---
+
+### ⚠️ Extraction Rules:
+
+- Only extract `amount` and `recipient` when `intent` is `"transfer"`. Otherwise, they must be `null`.
+- The `response` should always match the user's intent and sound natural in Korean.
+- Return only a **single JSON object**. Do not include explanations, notes, or other text.
+- Normalize numbers to integers (e.g., 삼만 원 → 30000)
+
+---
+
+### ✅ Example:
+
+Input:
+"엄마한테 삼만 원 보내줘"
+
+Output:
+{{
+  "intent": "transfer",
+  "amount": 30000,
+  "recipient": "엄마",
+  "response": "엄마님께 30,000원을 송금하시겠어요?"
+}}
+
+---
+
+Now analyze the following user input:
+{input_text}
+"""
+    }
+
+    user_message = {
+        "role": "user",
+        "content": input_text
+    }
+
+    return [system_message, user_message]
+
+def unified_system_prompt_eng3(input_text: str) -> list:
+    system_message = {
+        "role": "system",
+        "content": f"""
+You are a system that extracts structured information from Korean-language user input related to money transfers.
+
+Perform the following steps:
+
+1. Classify the user's intent as one of the following:
+   - transfer
+   - confirm
+   - cancel
+   - inquiry
+   - other
+   - system_response
+
+2. If the intent is "transfer", extract:
+   - amount: the numeric amount (e.g., 삼만 원 → 30000)
+   - recipient: the person to receive the money (name, relationship term, etc.)
+
+3. For all other intents, set amount and recipient to null.
+
+4. Always generate a natural Korean sentence in the field `response` that matches the user's intent.
+
+5. Output must be a single JSON object, and nothing else. Use the following format exactly.
+
+---
+
+Examples:
+
+text: "엄마한테 삼만원 보내줘"  
+{{
+  "intent": "transfer",
+  "amount": 30000,
+  "recipient": "엄마",
+  "response": "엄마님께 30,000원을 송금하시겠어요?"
+}}
+
+text: "삼만원 보내는 거였지"  
+{{
+  "intent": "confirm",
+  "amount": 30000,
+  "recipient": null,
+  "response": "30,000원 송금 요청을 확인했습니다."
+}}
+
+text: "보내지 마"   
+{{
+  "intent": "cancel",
+  "amount": null,
+  "recipient": null,
+  "response": "요청하신 송금을 취소했습니다."
+}}
+
+---
+
+User input:  
+{input_text}
+"""
+    }
+
+    user_message = {
+        "role": "user",
+        "content": input_text
+    }
+
+    return [system_message, user_message]
+
+def unified_system_prompt_eng4(input_text: str) -> list:
+    system_message = {
+        "role": "system",
+        "content": f"""
+Goal  
+You are an assistant that classifies Korean financial user inputs and extracts structured information for money transfers.
+
+---
+
+Input  
+A single user message in Korean related to money transfers.
+
+Output  
+A single JSON object with the following fields:
+
+- intent: One of ["transfer", "confirm", "cancel", "inquiry", "other", "system_response"]
+- amount: Integer in KRW (e.g. 30000), or null
+- recipient: Name or relation term, or null
+- response: A natural, polite Korean sentence tailored to the user's intent
+
+---
+
+Rules
+
+- Extract `amount` and `recipient` **only if intent is "transfer"**.
+- All other intents must return `amount: null`, `recipient: null`.
+- Use integer-only amounts (삼만원 → 30000).
+- `response` must be appropriate to the intent and written in Korean.
+- Output must include **only** a valid JSON object (no explanations).
+
+---
+
+Poor Example (wrong format or incomplete):
+"엄마한테 삼만 원 보내줘"
+→ `"intent": "transfer", "amount": 삼만, "recipient": 엄마"` ← (숫자 오류, JSON 형식 불일치)
+
+---
+
+Good Examples:
+
+text: "엄마한테 삼만원 보내줘"  
+{{
+  "intent": "transfer",
+  "amount": 30000,
+  "recipient": "엄마",
+  "response": "엄마님께 30,000원을 송금하시겠어요?"
+}}
+
+text: "송금할래"  
+{{
+  "intent": "transfer",
+  "amount": null,
+  "recipient": null,
+  "response": "송금하실 대상과 금액을 말씀해주세요."
+}}
+
+text: "보내지 마"  
+{{
+  "intent": "cancel",
+  "amount": null,
+  "recipient": null,
+  "response": "요청하신 송금을 취소했습니다."
+}}
+
+text: "아, 삼만원 보내는 거였지"  
+{{
+  "intent": "confirm",
+  "amount": 30000,
+  "recipient": null,
+  "response": "30,000원 송금 요청을 확인했습니다."
+}}
+
+---
+
+ Now process the following user message:  
+{input_text}
+"""
+    }
+
+    user_message = {
+        "role": "user",
+        "content": input_text
+    }
+
+    return [system_message, user_message]
+
+def unified_system_prompt_eng5(input_text: str) -> list:
+    system_message = {
+        "role": "system",
+        "content": f"""
+Extract a JSON object from the given Korean sentence using the following structure:
+
+- intent: one of ["transfer", "confirm", "cancel", "inquiry", "other", "system_response"]
+- amount: integer (KRW), or null
+- recipient: person name or relation, or null
+- response: a Korean message matching the intent
+
+Rules:
+- Only extract `amount` and `recipient` if `intent` is "transfer"
+- All other intents must return `amount`: null and `recipient`: null
+- response must be a natural Korean sentence
+- Do not include any text other than the JSON output
+
+Examples:
+
+text: "엄마한테 삼만원 보내줘"  
+{{
+  "intent": "transfer",
+  "amount": 30000,
+  "recipient": "엄마",
+  "response": "엄마님께 30,000원을 송금하시겠어요?"
+}}
+
+text: "보내지 마"  
+{{
+  "intent": "cancel",
+  "amount": null,
+  "recipient": null,
+  "response": "요청하신 송금을 취소했습니다."
+}}
+
+text: "삼만원 보내는 거였지"  
+{{
+  "intent": "confirm",
+  "amount": 30000,
+  "recipient": null,
+  "response": "30,000원 송금 요청을 확인했습니다."
+}}
+
+User input:  
+{input_text}
+"""
+    }
+
+    user_message = {
+        "role": "user",
+        "content": input_text
+    }
+
+    return [system_message, user_message]
+
+def unified_system_prompt_eng6(input_text: str) -> list:
+    system_message = {
+        "role": "system",
+        "content": f"""
+You are a Korean-language financial chatbot that extracts structured information from user input.
+
+Goal  
+Return a JSON object with the user's intent, amount, recipient, and response message based on the input.
+
+Input  
+A single user message in Korean, possibly related to money transfer.
+
+Output Format (JSON only)  
+{{
+  "intent": string,              // One of: transfer, confirm, cancel, inquiry, other, system_response
+  "amount": integer or null,     // In KRW, only if intent is transfer
+  "recipient": string or null,   // Name or relationship, only if intent is transfer
+  "response": string             // Polite Korean sentence appropriate to the intent
+}}
+
+Rules
+- Extract `amount` and `recipient` only if `intent` is "transfer". Else, set both to null.
+- Convert all written numbers to integers (e.g., 삼만원 → 30000).
+- The `response` must be a polite, natural Korean sentence appropriate to the intent.
+- Only return a single valid JSON object. Do not include any other text.
+
+Examples:
+
+text: "엄마한테 삼만 원 보내줘"  
+{{
+  "intent": "transfer",
+  "amount": 30000,
+  "recipient": "엄마",
+  "response": "엄마님께 30,000원을 송금하시겠어요?"
+}}
+
+text: "삼만 원 보내는 거였지"  
+{{
+  "intent": "confirm",
+  "amount": 30000,
+  "recipient": null,
+  "response": "30,000원 송금 요청을 확인했습니다."
+}}
+
+text: "보내지 마"  
+{{
+  "intent": "cancel",
+  "amount": null,
+  "recipient": null,
+  "response": "요청하신 송금을 취소했습니다."
+}}
+
+---
+
+Now process the following user input:  
+{input_text}
+"""
+    }
+
+    user_message = {
+        "role": "user",
+        "content": input_text
+    }
+
+    return [system_message, user_message]
+
+def Instruction_based_Prompting1(input_text: str) -> str:
+    return f"""
+You are a Korean-speaking AI assistant that extracts structured information from user messages related to money transfers.
+
+Your task is to analyze the user's sentence and return the following four fields as a single JSON object:
+
+- intent: one of [transfer, confirm, cancel, inquiry, other, system_response]
+- amount: integer amount in KRW (e.g. 30000), or null if not specified
+- recipient: name or label of the target person, or null if not present
+- response: natural Korean response based on the user's intent
+
+Conditions:
+- Only extract `amount` and `recipient` if `intent` is "transfer". Otherwise, set them to null.
+- Always respond with **only a single valid JSON object**. Do not include any other text, comments, or explanations.
+- All numbers must be normalized to integers (e.g., 삼만 원 == 30000).
+- The response field must be a polite Korean message that fits the intent.
+
+Example:
+
+User input: 엄마한테 삼만 원 보내줘
+
+Expected output:
+{{
+  "intent": "transfer",
+  "amount": 30000,
+  "recipient": "엄마",
+  "response": "엄마님께 30,000원을 송금하시겠어요?"
+}}
+
+Now, analyze the following user input and provide only the JSON output:
+
+"{input_text}"
+"""
