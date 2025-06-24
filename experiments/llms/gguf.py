@@ -134,8 +134,8 @@ Now, analyze the following user input:
             "role": "user",
             "content": [
                 {
-                    "type": "text",
-                    "text": input_text
+                    "type": "json",
+                    "text": input_text          
                 }
             ]
         }

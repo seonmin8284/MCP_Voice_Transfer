@@ -8,7 +8,7 @@
     },
     "response": "철수님께 10,000원을 전달해드릴까요?",
     "_meta": {
-      "inference_time": 2.53
+      "inference_time": 54.11
     }
   },
   {
@@ -20,7 +20,7 @@
     },
     "response": "엄마님께 30,000원을 송금해드릴까요?",
     "_meta": {
-      "inference_time": 2.51
+      "inference_time": 50.98
     }
   },
   {
@@ -32,7 +32,7 @@
     },
     "response": "만원을 받으실 수 있습니다.",
     "_meta": {
-      "inference_time": 1.97
+      "inference_time": 45.42
     }
   },
   {
@@ -44,7 +44,7 @@
     },
     "response": "엄마님께 30,000원을 보내드리겠습니다.",
     "_meta": {
-      "inference_time": 2.27
+      "inference_time": 59.22
     }
   },
   {
@@ -56,7 +56,7 @@
     },
     "response": "네, 나도 송금하시겠어요?",
     "_meta": {
-      "inference_time": 1.94
+      "inference_time": 41.85
     }
   },
   {
@@ -68,7 +68,7 @@
     },
     "response": "가스비를 내는 방법은 다음과 같습니다. 먼저 가스비를 구매하고, 이를 통해 가스를 출구로 가져와서 가스를 사용하세요. 다른 방법이 있으신가요?",
     "_meta": {
-      "inference_time": 3.65
+      "inference_time": 136.05
     }
   },
   {
@@ -80,7 +80,7 @@
     },
     "response": "내 계좌에는 현재 10,000원이 있습니다.",
     "_meta": {
-      "inference_time": 1.91
+      "inference_time": 36.38
     }
   },
   {
@@ -92,7 +92,7 @@
     },
     "response": "그 사람에게 다시 10,000원을 보내줄까요?",
     "_meta": {
-      "inference_time": 2.06
+      "inference_time": 46.76
     }
   },
   {
@@ -104,7 +104,7 @@
     },
     "response": "아까와 같이 보내겠습니다",
     "_meta": {
-      "inference_time": 1.46
+      "inference_time": 37.81
     }
   },
   {
@@ -116,7 +116,7 @@
     },
     "response": "송금하실 대상과 금액을 말씀해주세요.",
     "_meta": {
-      "inference_time": 1.73
+      "inference_time": 30.94
     }
   },
   {
@@ -128,7 +128,7 @@
     },
     "response": "이체 수수료를 알려드리겠습니다.",
     "_meta": {
-      "inference_time": 1.73
+      "inference_time": 33.27
     }
   },
   {
@@ -140,7 +140,7 @@
     },
     "response": "네, 아빠와 점심을 먹었습니다.",
     "_meta": {
-      "inference_time": 1.83
+      "inference_time": 34.69
     }
   },
   {
@@ -152,7 +152,7 @@
     },
     "response": "아빠님께 이만원을 전달해드릴까요?",
     "_meta": {
-      "inference_time": 2.25
+      "inference_time": 37.97
     }
   },
   {
@@ -164,7 +164,7 @@
     },
     "response": "여보님께 10만원 이체해드릴게요",
     "_meta": {
-      "inference_time": 2.26
+      "inference_time": 47.72
     }
   },
   {
@@ -176,7 +176,7 @@
     },
     "response": "요청하신 송금을 취소했습니다.",
     "_meta": {
-      "inference_time": 1.58
+      "inference_time": 31.21
     }
   },
   {
@@ -188,7 +188,7 @@
     },
     "response": "네, 당신이 원하시는 것에 대해 알려드리겠습니다. 무엇을 도와드릴까요?",
     "_meta": {
-      "inference_time": 2.18
+      "inference_time": 36.65
     }
   },
   {
@@ -200,7 +200,7 @@
     },
     "response": "엄마님께 30,000원을 송금해드릴까요?",
     "_meta": {
-      "inference_time": 2.48
+      "inference_time": 36.17
     }
   },
   {
@@ -212,7 +212,7 @@
     },
     "response": "삼만원을 보내는 거였습니다.",
     "_meta": {
-      "inference_time": 1.81
+      "inference_time": 29.25
     }
   },
   {
@@ -224,7 +224,7 @@
     },
     "response": "예금해드릴게요",
     "_meta": {
-      "inference_time": 1.63
+      "inference_time": 26.85
     }
   },
   {
@@ -236,7 +236,7 @@
     },
     "response": null,
     "_meta": {
-      "inference_time": 0.73
+      "inference_time": 15.45
     }
   }
 ]

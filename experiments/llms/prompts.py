@@ -1,8 +1,43 @@
+def unified_system_prompt0(input_text: str) -> list:
+    system_message = {
+        "role": "system",
+        "content": f"""
+당신은 한국어 송금 챗봇입니다.
+
+아래 사용자의 문장에서 intent, recipient, amount, response 항목을 직접 추출하여 다음의 JSON 형식으로만 출력하세요. 설명, reasoning, 부연 설명 없이 **오직 JSON만 반환**합니다.
+
+- intent: 반드시 [transfer, confirm, cancel, inquiry, other, system_response] 중 하나
+- recipient: 사람 이름 (존칭 없이 발화에 나온 대로 추출, 없으면 null)
+- amount: 금액 (원 단위, 숫자만), 없으면 null
+- response: 한국어 응답 (간결하고 자연스러운 안내문)
+
+예시:
+
+{{
+  "intent": "transfer",
+  "amount": 30000,
+  "recipient": "엄마",
+  "response": "엄마님께 30,000원을 송금해드릴까요?"
+}}
+
+**사용자 문장:**  
+{input_text}
+"""
+    }
+
+    user_message = {
+        "role": "user",
+        "content": input_text
+    }
+
+    return [system_message, user_message]
+
+
 def unified_system_prompt1(input_text: str) -> list:
     system_message = {
         "role": "system",
         "content": """
-당신은 송금 챗봇 어시스턴트입니다.  
+당신은 한국어 송금 챗봇 어시스턴트입니다.  
 사용자의 문장을 분석하여 다음 항목을 JSON 형식으로 추출하세요:
 
 - intent: transfer, confirm, cancel, inquiry, other, system_response 중 하나

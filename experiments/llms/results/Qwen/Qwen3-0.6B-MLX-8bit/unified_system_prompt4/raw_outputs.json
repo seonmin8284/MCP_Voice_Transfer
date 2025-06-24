@@ -1,0 +1,82 @@
+[
+  {
+    "text": "철수한테 오천 원 보내줘",
+    "raw_output": "<think>\nOkay, let's see. The user said \"철수한테 오천 원 보내줘\". The intent here is \"transfer\" because they're sending money to someone. The amount is 30000, the recipient is \"철수\", and the response should be a natural Korean message. I need to make sure all the fields are correctly filled and in the right format.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": 30000, \"recipient\": \"철수\", \"response\": \"철수님께 30,000원을 송금해드릴까요?\"}"
+  },
+  {
+    "text": "엄마한테 3만원만",
+    "raw_output": "<think>\nOkay, let's see. The user wrote \"엄마한테 3만원만\". The intent here is probably \"transfer\" because they're sending money to their mom. The amount is 30000, so I need to set that. The recipient is \"엄마\", which is \"Mom\". The response should be a natural Korean message asking if they want to send. Let me check the example again to make sure. Yep, that looks right. So the answer should be the same structure as the example provided.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": 30000, \"recipient\": \"엄마\", \"response\": \"엄마님께 30,000원을 송금해드릴까요?\"}"
+  },
+  {
+    "text": "만원만 보내줘",
+    "raw_output": "<think>\nOkay, let's see. The user said \"만원만 보내줘\". Translating that, it's \"Send only the money.\" So the intent here is to transfer money. The amount is not specified, so we leave it as null. The recipient is not mentioned, so we leave it as null. The response should be a natural Korean message asking for the amount and recipient. Let me check the example again to make sure. The example uses \"send only the money\" as the intent, and the response asks for the amount and recipient. Yep, that matches. So the final answer should be the intent, amount as null, recipient as null, and the response as the appropriate message.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": null, \"response\": \"송금하실 대상과 금액을 말씀해주세요.\"}"
+  },
+  {
+    "text": "엄마한테 보내줘",
+    "raw_output": "<think>\nOkay, let's see. The user said \"엄마한테 보내줘\". The intent here is to transfer money to the mother. The amount is 30,000, the recipient is the mother, and the response should be a confirmation. Wait, but the user just said \"보내줘\" which is \"send it\". So maybe the amount is not specified, so the amount is null. The recipient is the mother. The response would be \"엄마님께 30,000원을 송금해드릴까요?\" which is the example given. So the answer should be the same structure as the example.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": \"엄마\", \"response\": \"엄마님께 30,000원을 송금해드릴까요?\"}"
+  },
+  {
+    "text": "나 송금하고 싶어",
+    "raw_output": "<think>\nOkay, let's see. The user says, \"나 송금하고 싶어.\" So, the intent here is to transfer money. The amount is not specified, so we leave it as null. The recipient is not mentioned, so we leave it as null. The response should be a natural Korean message asking for the amount and recipient. Let me check the example again to make sure. The example uses \"amount\" and \"recipient\" when they are present. So in this case, the response should be something like \"금액과 대상이 알려주세요.\" which translates to \"Please tell me the amount and recipient.\" That matches the required format.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": null, \"response\": \"금액과 대상이 알려주세요.\"}"
+  },
+  {
+    "text": "가스비 내야 하는데 어떻게 해야 해?",
+    "raw_output": "<think>\nOkay, let's see. The user is asking how to pay for gas in a gas station. The previous message was \"가스비 내야 하는데 어떻게 해야 해?\" which translates to \"I need to pay for gas, how do I do it?\" So the user is asking for instructions on the payment method.\n\nLooking at the intent options, the correct one here is \"transfer\" because they're asking about a payment method. The amount isn't specified, so we leave it as null. The recipient isn't mentioned, so we leave that as null. The response should be a natural Korean message explaining the payment method. The response should be something like \"Gas payment can be done by using the gas station's payment system or purchasing directly from the store.\" That makes sense.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": null, \"response\": \"가스비를 결제하려면 가스터미나의 결제 시스템이나 직접 구매를 통해 하시면 됩니다.\"}"
+  },
+  {
+    "text": "내 계좌에 얼마 남았어?",
+    "raw_output": "<think>\nOkay, let's see. The user is asking, \"내 계좌에 얼마 남았어?\" which translates to \"How much money is left in my account?\" So the intent here is to inquire about the amount left in the account. The amount is not specified, so we leave it as null. The recipient is the user, so we set it to null. The response should be a natural Korean message asking for the amount. Let me check the example again to make sure. The example for \"내 계좌에 얼마 남았어?\" would be {\"intent\": \"inquiry\", \"amount\": null, \"recipient\": null, \"response\": \"계좌에서 남은 금액을 알려주세요.\"} That looks right. No other intents fit here, so the answer should be that.\n</think>\n\n{\"intent\": \"inquiry\", \"amount\": null, \"recipient\": null, \"response\": \"계좌에서 남은 금액을 알려주세요.\"}"
+  },
+  {
+    "text": "그 사람한테 또 보내줘",
+    "raw_output": "<think>\nOkay, let's see. The user's message is \"그 사람한테 또 보내줘\". The intent here is to request another message to be sent. The amount is null because there's no mention of a specific amount. The recipient is also null since they haven't specified a person. The response should be a natural Korean message asking for the recipient and amount. So the final answer should be the intent, null for amount, null for recipient, and the response as provided.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": null, \"response\": \"그 사람한테 다시 메시지를 보낼까요?\"}"
+  },
+  {
+    "text": "아까랑 똑같이 보내줘",
+    "raw_output": "<think>\nOkay, let's see. The user said \"아까랑 똑같이 보내줘\". Translating that, it's \"I sent the same thing as before.\" So the intent here is probably \"transfer\" because they're sending something similar. The amount might be null since there's no mention of a specific amount. The recipient is also null because there's no name mentioned. The response should be a natural Korean message asking for confirmation or details. Let me check the example again to make sure. Yep, the intent is transfer, amount is null, recipient is null, and the response asks for confirmation.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": null, \"response\": \"송금하실 대상과 금액을 말씀해주세요.\"}"
+  },
+  {
+    "text": "송금할래",
+    "raw_output": "<think>\nOkay, let's see. The user said \"송금할래\" which translates to \"Send money.\" The task is to extract intent, amount, recipient, and response from this text.\n\nFirst, the intent. The user is asking to send money, so the intent should be \"transfer.\" \n\nNext, the amount. The text doesn't mention a specific amount, so the amount field is null.\n\nThe recipient is also not mentioned, so the recipient is null.\n\nFor the response, the system should provide a natural Korean response. The example given earlier was \"송금하실 대상과 금액을 말씀해주세요.\" which translates to \"Please specify the recipient and amount.\" So the response would be that.\n\nI need to make sure all fields are correctly filled and in the right format. Let me double-check the example to ensure consistency. Yep, looks good.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": null, \"response\": \"송금하실 대상과 금액을 말씀해주세요.\"}"
+  },
+  {
+    "text": "이체 수수료 얼마야?",
+    "raw_output": "<think>\nOkay, let's see. The user is asking about the transfer fee. The text is \"이체 수수료 얼마야?\" which translates to \"What's the transfer fee?\".\n\nLooking at the intent options, the correct one here is \"transfer\" because they're asking about a transfer-related fee. The amount is not specified, so we leave it as null. The recipient isn't mentioned, so we set that to null. The response should be a natural Korean message confirming the transfer fee. The example given earlier for confirming the transfer used the amount and response. So the response would be something like \"이체 수수료는 5000원입니다.\" or similar. I need to make sure the response is in Korean and matches the example structure.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": null, \"response\": \"이체 수수료는 5000원입니다.\"}"
+  },
+  {
+    "text": "오늘 아빠랑 점심 먹었어",
+    "raw_output": "<think>\nOkay, let's see. The user just said, \"오늘 아빠랑 점심 먹었어.\" Translating that, it's \"I had lunch with my dad today.\" \n\nFirst, I need to determine the intent. The user is talking about having lunch with their dad, which is a general statement. The options are transfer, confirm, cancel, inquiry, other, or system response. Since there's no mention of sending money or confirming a transaction, the intent here is likely \"other\" because it's a general statement about a conversation.\n\nNext, the amount. The text doesn't mention any money or transaction, so the amount should be null.\n\nThe recipient is mentioned as \"아빠\" (my dad), so the recipient is \"아빠.\"\n\nThe response would be a natural Korean message. Since the user didn't specify anything else, the response should be something like \"아빠, 점심을 먹으셨나요? 다음날에도 함께 먹을 수 있어요!\" which is a friendly and helpful response.\n\nI need to make sure all the fields are correctly filled and follow the format. Let me double-check each part to ensure there are no mistakes.\n</think>\n\n{\"intent\": \"other\", \"amount\": null, \"recipient\": \"아빠\", \"response\": \"아빠, 점심을 먹으셨나요? 다음날에도 함께 먹을 수 있어요!\"}"
+  },
+  {
+    "text": "아빠한테 이만원 보내줘",
+    "raw_output": "<think>\nOkay, let's see. The user said \"아빠한테 이만원 보내줘\". Translating that, it's \"My dad will send me 10,000 yen to him\". \n\nFirst, I need to determine the intent. The action here is sending money, so the intent should be \"transfer\". \n\nNext, the amount. The user mentioned \"이만원\", which is 10,000 yen. So the amount is 10000.\n\nThe recipient is \"아빠\", which is the dad. So the recipient is \"아빠\".\n\nThe response should be a natural Korean message. The user is confirming the transfer, so the response would be something like \"아빠님께 10,000원을 송금해드릴까요?\" \n\nI need to make sure all the fields are correctly filled. The amount is a number, so 10000. The recipient is \"아빠\". The intent is transfer. The response is in Korean, as required.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": 10000, \"recipient\": \"아빠\", \"response\": \"아빠님께 10,000원을 송금해드릴까요?\"}"
+  },
+  {
+    "text": "여보한테 십만 원 이체해줘",
+    "raw_output": "<think>\nOkay, let's see. The user said \"여보한테 십만 원 이체해줘\". The intent here is to transfer money. The amount is 100,000. The recipient is \"여보한테\", which is \"Mom\". The response should be a natural Korean message. So the answer should be in the format specified.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": 100000, \"recipient\": \"여보한테\", \"response\": \"여보한테 100,000원을 송금해드릴까요?\"}"
+  },
+  {
+    "text": "보내지 마",
+    "raw_output": "<think>\nOkay, let's see. The user said \"보내지 마\" which translates to \"Don't send it.\" So the intent here is probably to cancel the transfer. The previous message was \"송금할래\" which means \"Send it.\" Now they're saying not to send it. \n\nSo the intent is \"cancel\". The amount is null because there's no mention of a specific amount. The recipient is also null since they didn't specify a recipient. The response should be a confirmation that the action was canceled, like \"요청하신 송금을 취소했습니다.\" \n\nI need to make sure all the fields are correctly filled. The response should be in Korean and natural. Let me check again. Yes, that's correct.\n</think>\n\n{\"intent\": \"cancel\", \"amount\": null, \"recipient\": null, \"response\": \"요청하신 송금을 취소했습니다.\"}"
+  },
+  {
+    "text": "그냥 넘어가줘",
+    "raw_output": "<think>\nOkay, let's see. The user input is \"그냥 넘어가줘\". Translating that, it's \"Just go ahead.\" But I need to analyze it according to the given instructions.\n\nFirst, the intent. The options are transfer, confirm, cancel, inquiry, other, system response. The text here seems like a request to proceed without specifying any details. Since there's no mention of a transfer, confirm, cancel, or inquiry, the intent is likely \"other\" or \"system_response\". But \"system_response\" is for system responses, not user messages. So maybe \"other\" is the correct intent here.\n\nNext, amount. The text doesn't mention any amount or recipient, so amount is null.\n\nRecipient: No mention of a person, so recipient is null.\n\nResponse: The user just says \"just go ahead,\" which is a polite request. The response should be a natural Korean message. For example, \"요청하신 송금을 진행할 수 있습니다.\" which translates to \"You can proceed with the transfer request.\"\n\nSo putting it all together, the response should be in the format as specified, with intent, amount, recipient, and response.\n</think>\n\n{\"intent\": \"other\", \"amount\": null, \"recipient\": null, \"response\": \"요청하신 송금을 진행할 수 있습니다.\"}"
+  },
+  {
+    "text": "엄마 송금해줘",
+    "raw_output": "<think>\nOkay, let's see. The user said \"엄마 송금해줘\". The intent here is to transfer money to the mother. The amount is 30,000, the recipient is the mother, and the response should be a confirmation. The response should be in Korean, so I need to make sure it's natural. Let me check the example again. The example uses \"30,000원을 송금해드릴까요?\" for the response. So the correct format should be the same. The user didn't specify the amount, so the amount is null. The recipient is \"엄마\". The response is a confirmation. Got it.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": \"엄마\", \"response\": \"엄마님께 30,000원을 송금해드릴까요?\"}"
+  },
+  {
+    "text": "아, 삼만원 보내는 거였지",
+    "raw_output": "<think>\nOkay, let's see. The user said \"아, 삼만원 보내는 거였지.\" So they're confirming that they sent the 30,000원. The intent here is to confirm the transfer. The amount is 30,000, the recipient is null because they didn't specify a person. The response should be a natural Korean message asking for confirmation. I need to make sure the response is friendly and matches the intent.\n</think>\n\n{\"intent\": \"confirm\", \"amount\": 30000, \"recipient\": null, \"response\": \"30,000원 송금 요청으로 확인했습니다.\"}"
+  },
+  {
+    "text": "예금해줘",
+    "raw_output": "<think>\nOkay, let's see. The user said \"예금해줘\" which translates to \"Transfer money to...\" in Korean. The intent here is to transfer money, so the correct intent is \"transfer\". The amount is not specified, so we leave it as null. The recipient is not mentioned, so we leave it as null. The response should be a natural Korean message asking for the amount and recipient. Let me check the example again to make sure. Yep, that matches. So the final answer should be the intent, amount as null, recipient as null, and the response as the appropriate message.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": null, \"response\": \"송금하실 대상과 금액을 말씀해주세요.\"}"
+  },
+  {
+    "text": "누구한테 보낼까요?",
+    "raw_output": "<think>\nOkay, let's see. The user asked, \"누구한테 보낼까요?\" which translates to \"Who will send to?\" in English. The intent here is to ask for the recipient's name. The amount and response need to be determined based on the text.\n\nSince the user is asking about who to send to, the intent is \"transfer\" because they're likely asking for the recipient. The amount isn't specified, so we leave it as null. The recipient is the person they're sending to, which is not mentioned, so we leave it as null. The response should be a natural Korean message asking for the recipient's name again. \n\nI need to make sure the response is in Korean and matches the example. The example shows that if the user says \"보내지 마\", the response is \"요청하신 송금을 취소했습니다.\" So the response here should be similar, asking for the recipient's name again.\n</think>\n\n{\"intent\": \"transfer\", \"amount\": null, \"recipient\": null, \"response\": \"보내시자에게 이름을 알려주세요.\"}"
+  }
+]

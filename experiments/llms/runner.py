@@ -2,7 +2,7 @@ import json
 import re
 import time
 import os
-
+from mlx_lm import load, generate
 
 def run_inference(input_text: str, unified_system_prompt, tokenizer, model, max_new_tokens=128):
     messages = unified_system_prompt(input_text)
@@ -44,6 +44,45 @@ def run_inference(input_text: str, unified_system_prompt, tokenizer, model, max_
 
     return output_text, None, round(end - start, 2)
 
+def run_inference_qwen3(input_text: str, unified_system_prompt, tokenizer, model, max_new_tokens=2048):
+    # 시스템 프롬프트와 유저 메시지 생성
+    messages = unified_system_prompt(input_text)
+    
+    # MLX용 chat template 적용
+    if tokenizer.chat_template is not None:
+        prompt = tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True
+        )
+    else:
+        raise ValueError("Tokenizer에 chat_template이 없습니다.")
+
+    start = time.time()
+    response = generate(
+        model,
+        tokenizer,
+        prompt=prompt,
+        max_tokens=max_new_tokens,
+        verbose=False,
+        enable_thinking=False
+    )
+    end = time.time()
+
+    output_text = response.strip()+"}"
+
+    # JSON 파싱 시도
+    match = re.search(r'\{[\s\S]*?\}', output_text)
+    if match:
+        try:
+            parsed_json = json.loads(match.group())
+            return output_text, parsed_json, round(end - start, 2)
+        except json.JSONDecodeError as e:
+            print(f"❌ JSON 파싱 실패: {e}")
+    else:
+        print("⚠️ JSON 패턴 찾기 실패")
+
+    return output_text, None, round(end - start, 2)
+
 def evaluate_results(results, samples, total_time):
     correct_intent = 0
     correct_recipient = 0
@@ -77,7 +116,7 @@ def evaluate_results(results, samples, total_time):
     }
 
 
-def llm_sampling(model, tokenizer, samples, prompt):
+def llm_sampling(model, tokenizer, samples, prompt,run_inference):
     prompt_name = prompt.__name__
     model_name = model.name_or_path.replace("/", "_")
     save_dir = f"results/{model_name}/{prompt_name}"
