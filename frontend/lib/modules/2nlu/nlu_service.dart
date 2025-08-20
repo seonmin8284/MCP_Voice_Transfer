@@ -1,32 +1,32 @@
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:llama_cpp_dart/llama_cpp_dart.dart';
+// import 'package:llama_cpp_dart/llama_cpp_dart.dart'; // 임시 주석 처리
 import 'package:flutter/foundation.dart';
 
 //언어모델 프롬프트 수정
-class QwenPromptFormat extends PromptFormat {
-  QwenPromptFormat()
-    : super(
-        PromptFormatType.chatml,
-        inputSequence: "<|im_start|>user\n",
-        outputSequence: "<|im_end|>\n<|im_start|>assistant\n",
-        systemSequence: "<|im_start|>system\n",
-        stopSequence: "<|im_end|>",
-      );
+// class QwenPromptFormat extends PromptFormat { // 임시 주석 처리
+//   QwenPromptFormat()
+//     : super(
+//         PromptFormatType.chatml,
+//         inputSequence: "<|im_start|>user\n",
+//         outputSequence: "<|im_end|>\n<|im_start|>assistant\n",
+//         systemSequence: "<|im_start|>system\n",
+//         stopSequence: "<|im_end|>",
+//       );
 
-  @override
-  String formatPrompt(String prompt) {
-    return """
-<|im_start|>system
-You are a helpful assistant.
-<|im_end|>
-<|im_start|>user
-$prompt
-<|im_end|>
-<|im_start|>assistant
-""";
-  }
-}
+//   @override
+//   String formatPrompt(String prompt) {
+//     return """
+// <|im_start|>system
+// You are a helpful assistant.
+// <|im_end|>
+// <|im_start|>user
+// $prompt
+// <|im_end|>
+// <|im_start|>assistant
+// """;
+//   }
+// }
 
 Future<String> downloadQwenModel({
   required String modelName,
@@ -68,11 +68,11 @@ Future<String> downloadQwenModel({
 }
 
 class NluService {
-  late final LlamaParent _llamaParent;
+  // late final LlamaParent _llamaParent; // 임시 주석 처리
   late final String _localModelPath;
   final StringBuffer _responseBuffer = StringBuffer();
-  Stream<String> get stream => _llamaParent.stream;
-  Stream<void> get completions => _llamaParent.completions;
+  // Stream<String> get stream => _llamaParent.stream; // 임시 주석 처리
+  // Stream<void> get completions => _llamaParent.completions; // 임시 주석 처리
   NluService();
 
   Future<void> _prepareModel() async {
@@ -95,19 +95,19 @@ class NluService {
   Future<void> initialize() async {
     await _prepareModel();
 
-    final loadCommand = LlamaLoad(
-      path: _localModelPath,
-      modelParams: ModelParams(),
-      contextParams: ContextParams(),
-      samplingParams: SamplerParams(), // 출력 토큰 제한 추가
-      format: QwenPromptFormat(),
-    );
+    // final loadCommand = LlamaLoad( // 임시 주석 처리
+    //   path: _localModelPath,
+    //   modelParams: ModelParams(),
+    //   contextParams: ContextParams(),
+    //   samplingParams: SamplerParams(), // 출력 토큰 제한 추가
+    //   format: QwenPromptFormat(),
+    // );
 
-    _llamaParent = LlamaParent(loadCommand);
-    await _llamaParent.init();
+    // _llamaParent = LlamaParent(loadCommand); // 임시 주석 처리
+    // await _llamaParent.init(); // 임시 주석 처리
     print("🟢 [NLU Init] 모델 세션 로딩 성공!");
 
-    // _llamaParent.stream.listen((response) {
+    // _llamaParent.stream.listen((response) { // 임시 주석 처리
     //   if (response.trim().isEmpty) {
     //     print('🧠 (경고) 빈 응답 수신!');
     //   } else {
@@ -116,16 +116,17 @@ class NluService {
     //   }
     // });
 
-    _llamaParent.completions.listen((event) {
-      print('📥 Completion 완료됨: $event');
-      print('💬 전체 응답 결과: ${_responseBuffer.toString()}');
-      _responseBuffer.clear(); // 다음 응답 위해 초기화
-    });
+    // _llamaParent.completions.listen((event) { // 임시 주석 처리
+    //   print('📥 Completion 완료됨: $event');
+    //   print('💬 전체 응답 결과: ${_responseBuffer.toString()}');
+    //   _responseBuffer.clear(); // 다음 응답 위해 초기화
+    // });
   }
 
   void ask(String inputText) {
-    final prompt = QwenPromptFormat().formatPrompt(inputText);
-    print('📨 실제 전송될 Prompt: $prompt');
-    _llamaParent.sendPrompt(prompt);
+    // final prompt = QwenPromptFormat().formatPrompt(inputText); // 임시 주석 처리
+    // print('📨 실제 전송될 Prompt: $prompt'); // 임시 주석 처리
+    // _llamaParent.sendPrompt(prompt); // 임시 주석 처리
+    print('📨 NLU 서비스 임시 비활성화: $inputText');
   }
 }

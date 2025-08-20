@@ -29,7 +29,7 @@ class SttServiceWhisperStream implements SttInterface {
     }
 
     whisper = Whisper(
-      model: WhisperModel.baseQ8_0,
+      model: WhisperModel.smallQ8_0,
       downloadHost: "https://huggingface.co/ggerganov/whisper.cpp/resolve/main",
     );
     final version = await whisper!.getVersion();
@@ -126,7 +126,6 @@ class SttServiceWhisperStream implements SttInterface {
           print("❌ 최종 Whisper 오류: $e");
         }
       }
-      ;
 
       periodicTimer.cancel();
     });
