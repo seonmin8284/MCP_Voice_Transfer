@@ -41,6 +41,12 @@ frontend/.env
 frontend/*.key
 frontend/*.jks
 frontend/*.keystore
+*.env
+.env.local
+.env.production
+.env.development
+huggingface_token.txt
+huggingface_config.json
 
 # ───────────────────────────
 # 실행 파일 및 임시 파일
